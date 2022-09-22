@@ -1,16 +1,33 @@
 import React, { useState } from "react";
+import { dbService } from "fbase";
+import { addDoc, collection } from "firebase/firestore";
 
 const Home = () => {
-  const [nweet, setNweet] = useState();
-  const onSubmit = (event) => {
+  const [nweet, setNweet] = useState("");
+  const onSubmit = async (event) => {
     event.preventDefault();
+
+    try {
+      const docRef = await addDoc(collection(dbService, "nweets"), {
+        nweet: nweet,
+        createdAt: Date.now(),
+      });
+      setNweet("");
+      console.log("Success");
+      console.log("Document written with ID: ", docRef.id);
+    } catch (error) {
+      console.log("Something worng");
+      console.log("Error adding document: ", error);
+    }
   };
+
   const onChange = (event) => {
     const {
       target: { value },
     } = event;
     setNweet(value);
   };
+
   return (
     <div>
       <form onSubmit={onSubmit}>
