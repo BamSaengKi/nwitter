@@ -1,44 +1,50 @@
 import React, { useEffect, useState } from "react";
 import { dbService } from "fbase";
-import { doc, addDoc, collection, getDocs, onSnapshot, query, orderBy, QuerySnapshot } from "firebase/firestore";
+import {
+  doc,
+  addDoc,
+  collection,
+  getDocs,
+  onSnapshot,
+  query,
+  orderBy,
+  QuerySnapshot,
+} from "firebase/firestore";
+import Nweet from "components/Nweet";
+
 const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
   const [nweets, setNweets] = useState([]);
-  // const getNweets = async () => {
-  //   const dbnweets = await getDocs(collection(dbService, "nweets"));
-  //   // dbnweets.forEach((document) => console.log(document.data()))
-  //   dbnweets.forEach((document) => {
-  //     const nweetsObject = {
-  //       ...document.data(),
-  //       id: document.id,
-  //     };
-  //     setNweets((prev) => [document.data(), ...prev]);
-  //   });
-  // };
-
 
   useEffect(() => {
-    // getNweets();
-    const q = query(collection(dbService, "nweets")
+    // onSnapshot(collection(dbService, "nweets"), (snapshot) =>{
+    //   const nweetArray = snapshot.docs.map((document)=>({
+    //     id : document.id,
+    //     ...document.data(),
+    //   }))
+    //   setNweets(nweetArray)
+    // })
+
+    const q = query(
+      collection(dbService, "nweets"),
+      orderBy("createdAt", "desc")
     );
-    onSnapshot(q, (Snapshot)=>{
-      const nweetArray = Snapshot.docs.map((document)=>({
-        
-          id : document.id,
-          ...document.data(),
-        
+    onSnapshot(q, (Snapshot) => {
+      const nweetArray = Snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
       }));
-      setNweets(nweetArray)
-    })
+      setNweets(nweetArray);
+    });
   }, []);
 
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
       const docRef = await addDoc(collection(dbService, "nweets"), {
-        text : nweet,
+        text: nweet,
         createdAt: Date.now(),
-        creatorId : userObj.uid,
+        creatorId: userObj.uid,
       });
       console.log("Success");
       console.log("Document written with ID: ", docRef.id);
@@ -69,9 +75,11 @@ const Home = ({ userObj }) => {
       </form>
       <div>
         {nweets.map((nweet) => (
-          <div key={nweet.id}>
-            <h4>{nweet.text}</h4>
-          </div>
+          <Nweet
+            key={nweet.id}
+            nweetObj={nweet}
+            isOwner={nweet.creatorId === userObj.uid}
+          />
         ))}
       </div>
     </div>
