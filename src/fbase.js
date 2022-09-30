@@ -6,6 +6,7 @@ import "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage"
 
 
 
@@ -26,5 +27,7 @@ export const firebaseInstance = firebase;
 export const authService = getAuth();
 
 export const dbService = getFirestore();
+
+export const storageService = getStorage()
 
 export default app;
