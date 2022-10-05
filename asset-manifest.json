@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/BamSaengKi.github.io/nwitter/static/css/main.ff37f1a6.css",
-    "main.js": "/BamSaengKi.github.io/nwitter/static/js/main.8bef1402.js",
-    "index.html": "/BamSaengKi.github.io/nwitter/index.html",
-    "main.ff37f1a6.css.map": "/BamSaengKi.github.io/nwitter/static/css/main.ff37f1a6.css.map",
-    "main.8bef1402.js.map": "/BamSaengKi.github.io/nwitter/static/js/main.8bef1402.js.map"
+    "main.css": "/bamsaengki.github.io/nwitter/static/css/main.ff37f1a6.css",
+    "main.js": "/bamsaengki.github.io/nwitter/static/js/main.043dc0d5.js",
+    "index.html": "/bamsaengki.github.io/nwitter/index.html",
+    "main.ff37f1a6.css.map": "/bamsaengki.github.io/nwitter/static/css/main.ff37f1a6.css.map",
+    "main.043dc0d5.js.map": "/bamsaengki.github.io/nwitter/static/js/main.043dc0d5.js.map"
   },
   "entrypoints": [
     "static/css/main.ff37f1a6.css",
-    "static/js/main.8bef1402.js"
+    "static/js/main.043dc0d5.js"
   ]
 }
